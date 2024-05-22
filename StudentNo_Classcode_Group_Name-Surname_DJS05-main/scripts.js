@@ -14,6 +14,18 @@ class Counter {
     subscribe(listener) {
         this.listeners.push(listener);
     }
+
+    // Dispatch action to update the state
+    dispatch(action) {
+        // Check the type of the action and update the state accordingly
+        if (action.type === 'add') {
+            this.state = { count: this.state.count + 1 };
+        }
+
+        // Call all subscribed listener functions with the updated state
+        this.listeners.forEach((listener) => listener());
+    }
+}
 }
 
 // Create a new counter instance
