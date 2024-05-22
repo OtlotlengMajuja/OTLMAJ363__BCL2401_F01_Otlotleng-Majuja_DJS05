@@ -2,6 +2,7 @@ class Counter {
     // Constructor initializes the counter with an initial state
     constructor() {
         this.state = { count: 0 };
+        // List of subscribed listeners
         this.listeners = [];
     }
 
@@ -15,7 +16,7 @@ class Counter {
         this.listeners.push(listener);
         // return an unsubscribe function to remove the listener
         return () => {
-            this.listeners = this.listeners.filter(1 => 1 !== listener);
+            this.listeners = this.listeners.filter(listenerItem => listenerItem !== listener);
         };
     }
 
