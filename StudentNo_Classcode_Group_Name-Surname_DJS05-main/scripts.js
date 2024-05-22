@@ -20,12 +20,13 @@ class Counter {
         // Check the type of the action and update the state accordingly
         if (action.type === 'add') {
             this.state = { count: this.state.count + 1 };
+        } else if (action.type === 'subtract') {
+            this.state = { count: this.state.count - 1 };
         }
 
         // Call all subscribed listener functions with the updated state
         this.listeners.forEach((listener) => listener());
     }
-}
 }
 
 // Create a new counter instance
