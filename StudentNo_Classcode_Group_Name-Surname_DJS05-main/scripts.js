@@ -9,7 +9,7 @@ class Counter {
         this.value -= 1
     }
 
-    log() {
-        console.log(this.value)
+    reset() {
+        this.value.reset()
     }
 }
