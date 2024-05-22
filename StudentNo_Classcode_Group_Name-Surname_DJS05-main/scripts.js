@@ -21,15 +21,19 @@ class Counter {
 
     // Dispatch action to the counter, which will update the state based on the action type
     dispatch(action) {
-        // If the action type is 'add', increment the count in the state
-        if (action.type === 'ADD') {
-            this.state = { count: this.state.count + 1 };
-            // If the action type is 'subtract', decrement the count in the state
-        } else if (action.type === 'SUBTRACT') {
-            this.state = { count: this.state.count - 1 };
-            // If the action type is 'reset', set the count to 0
-        } else if (action.type === 'RESET') {
-            this.state = { count: 0 };
+        switch (action.type) {
+            case 'ADD':
+                this.state = { count: this.state.count + 1 };
+                break;
+            case 'SUBTRACT':
+                this.state = { count: this.state.count - 1 };
+                break;
+            case 'RESET':
+                this.state = { count: 0 };
+                break;
+            default:
+                // If an unknown action type is dispatched, do nothing
+                return;
         }
 
         // Call all subscribed listener functions with the updated state
