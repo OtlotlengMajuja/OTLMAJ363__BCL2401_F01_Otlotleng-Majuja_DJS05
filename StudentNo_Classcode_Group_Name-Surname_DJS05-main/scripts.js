@@ -59,4 +59,6 @@ counter.dispatch({ type: 'SUBTRACT' });
 // Dispatch a 'reset' action to the counter, which will set the count to 0
 counter.dispatch({ type: 'RESET' });
 
+// Unsubscribe for the state changes
+unsubscribe();
 
