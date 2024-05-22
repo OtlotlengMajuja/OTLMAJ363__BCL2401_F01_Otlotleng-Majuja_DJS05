@@ -45,7 +45,7 @@ class Counter {
 const counter = new Counter();
 
 // Subscribe a listener to the counter that will log the state whenever it changes
-counter.subscribe(() => console.log(store.getState()));
+const unsubscribe = counter.subscribe((state) => console.log(state));
 
 // Dispatch an 'add' action to the counter, which will increment the count to 1
 counter.dispatch({ type: 'ADD' });
