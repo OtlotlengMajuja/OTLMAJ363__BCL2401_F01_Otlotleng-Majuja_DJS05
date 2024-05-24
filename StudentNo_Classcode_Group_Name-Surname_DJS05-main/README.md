@@ -6,7 +6,7 @@ In order to complete this challenge, I had to build a Redux-inspired store using
 
 ## Disclaimer
 
-The terminal indicates that it cannot locate the module, and the file names are a little mixed up. I made multiple unsuccessful attempts to fix it. I apologize profusely
+The terminal indicates that it cannot locate the module, and the file names are a little mixed up. I made multiple unsuccessful attempts to fix it. I apologize profusely.
 
 ## Project Overview
 
