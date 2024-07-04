@@ -9,6 +9,15 @@ function createCounter() {
         return state;
     }
 
+    // Subscribe listener function to be called when state changes
+    function subscribe(listener) {
+        listeners.push(listener);
+        // Return unsubscribe function to remove listener
+        return () => {
+            listeners = listeners.filter(listenerItem => listenerItem !== listener);
+        };
+    }
+
     // Reducer function to handle actions and update the state
     function reducer(action) {
         switch (action.type) {
@@ -18,7 +27,6 @@ function createCounter() {
                 return { count: state.count - 1 };
             case 'RESET':
                 return { count: 0 };
-                break;
             default:
                 return state;
         }
@@ -33,8 +41,34 @@ function createCounter() {
             listeners.forEach(listener => listener(state));
         }
     }
+
+    return {
+        getState,
+        subscribe,
+        dispatch
+    };
 }
 
+// Create a new counter instance
+const counter = createCounter();
+
+// Subscribe a listener to the counter that will log the state whenever it changes
+const unsubscribe = counter.subscribe((state) => console.log(state));
+
+// Dispatch an 'add' action to the counter, which will increment the count to 1
+counter.dispatch({ type: 'ADD' });
+
+// Dispatch another 'add' action to the counter, which will increment the count to 2
+counter.dispatch({ type: 'ADD' });
+
+// Dispatch a 'subtract' action to the counter, which will decrement the count to 1
+counter.dispatch({ type: 'SUBTRACT' });
+
+// Dispatch a 'reset' action to the counter, which will set the count to 0
+counter.dispatch({ type: 'RESET' });
+
+// Unsubscribe for the state changes
+unsubscribe();
 
 /*class Counter {
     // Constructor initializes the counter with an initial state
@@ -79,25 +113,3 @@ function createCounter() {
         this.listeners.forEach((listener) => listener());
     }
 } */
-
-// Create a new counter instance
-const counter = new Counter();
-
-// Subscribe a listener to the counter that will log the state whenever it changes
-const unsubscribe = counter.subscribe((state) => console.log(state));
-
-// Dispatch an 'add' action to the counter, which will increment the count to 1
-counter.dispatch({ type: 'ADD' });
-
-// Dispatch another 'add' action to the counter, which will increment the count to 2
-counter.dispatch({ type: 'ADD' });
-
-// Dispatch a 'subtract' action to the counter, which will decrement the count to 1
-counter.dispatch({ type: 'SUBTRACT' });
-
-// Dispatch a 'reset' action to the counter, which will set the count to 0
-counter.dispatch({ type: 'RESET' });
-
-// Unsubscribe for the state changes
-unsubscribe();
-
