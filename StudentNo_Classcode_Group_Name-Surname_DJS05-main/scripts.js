@@ -1,4 +1,42 @@
-class Counter {
+function createCounter() {
+    // Initial state of counter
+    let state = { count: 0 };
+    // List of subscribed listeners
+    let listeners = [];
+
+    // Get the current state of the counter
+    function getState() {
+        return state;
+    }
+
+    // Reducer function to handle actions and update the state
+    function reducer(action) {
+        switch (action.type) {
+            case 'ADD':
+                return { count: state.count + 1 };
+            case 'SUBTRACT':
+                return { count: state.count - 1 };
+            case 'RESET':
+                return { count: 0 };
+                break;
+            default:
+                return state;
+        }
+    }
+
+    // Dispatch action to the counter, which will update the state based on the action type
+    function dispatch(action) {
+        const newState = reducer(action);
+        if (newState !== state) {
+            state = newState;
+            // Call all subscribed listener functions with updated state
+            listeners.forEach(listener => listener(state));
+        }
+    }
+}
+
+
+/*class Counter {
     // Constructor initializes the counter with an initial state
     constructor() {
         this.state = { count: 0 };
@@ -40,7 +78,7 @@ class Counter {
         // Call all subscribed listener functions with the updated state
         this.listeners.forEach((listener) => listener());
     }
-}
+} */
 
 // Create a new counter instance
 const counter = new Counter();
